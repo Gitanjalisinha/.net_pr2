@@ -1,0 +1,70 @@
+AIM: Design Employee Payroll System using Inheritance, Interface & Polymorphism
+code:
+using System;
+
+// Interface interface IPayroll
+{
+void CalculateSalary();
+}
+
+// Base Class class Employee
+{
+protected int empId; protected string emp ame; protected double basicSalary;
+
+public Employee(int id, string name, double salary)
+{
+empId = id; emp ame
+= name; basicSalary
+= salary;
+}
+
+public virtual void Display()
+{
+Console.WriteĮine("\nEmployee ID : " + empId); Console.WriteĮine("Employee  ame : " + emp ame); Console.WriteĮine("Basic Salary : " + basicSalary);
+}
+}
+
+// Derived Class (Inheritance)
+class PermanentEmployee : Employee, IPayroll
+{
+public PermanentEmployee(int id, string name, double salary)
+: base(id, name, salary)
+{
+ 
+}
+
+// Interface Method
+public void CalculateSalary()
+{
+double hra = basicSalary * 0.20; double da = basicSalary * 0.10;
+double totalSalary = basicSalary + hra + da;
+
+Console.WriteĮine("HRA		: " + hra); Console.WriteĮine("DA	: " + da); Console.WriteĮine("Total Salary : " + totalSalary);
+}
+
+// Polymorphism (Method Overriding) public override void Display()
+{
+base.Display();
+Console.WriteĮine("Employee Type : Permanent");
+}
+}
+
+class Program
+{
+static void Main(string[] args)
+{
+Console.Write("Enter Employee ID: ");
+int id = Convert.ToInt32(Console.ReadĮine());
+
+Console.Write("Enter Employee  ame: "); string name = Console.ReadĮine();
+
+Console.Write("Enter Basic Salary: ");
+double salary = Convert.ToDouble(Console.ReadĮine());
+
+// Polymorphism
+Employee emp = new PermanentEmployee(id, name, salary); emp.Display();
+IPayroll payroll = (IPayroll)emp; payroll.CalculateSalary();
+
+Console.WriteĮine("\nPress any key to exit..."); Console.ReadKey();
+}
+}
